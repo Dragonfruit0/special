@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Login by shobhit</title>
+    <title>Happy BirthDay Jannnuuuu</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -100,6 +100,55 @@
         <input type="text" id="code" name="code" placeholder="Your Name">
         <button id="submit-btn">Login</button>
     </form>
+    <div id="countdown" style="color: white; font-size: 1.5em; text-align: center; margin-bottom: 20px; display: none;">
+        <div>Time Until Birthday Unlock:</div>
+        <div id="timer">00d 00h 00m 00s</div>
+    </div>
+    
+      <!-- Birthday Popup (Add before closing body tag) -->
+    <div id="birthday-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;">
+        <div style="background: white; padding: 30px; border-radius: 15px; text-align: center;">
+            <h2 style="color: #ff4d79;">🎉 Happy Birthday My Jaan! 🎂</h2>
+            <p>The wait is over! Your special surprise is ready 💖</p>
+            <button onclick="closePopup()" style="margin-top: 15px;">Let's Celebrate! 🥳</button>
+        </div>
+        <script>
+            // Timer Logic
+            const targetDate = new Date('2025-03-01T00:00:00').getTime();
+            
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+            
+                if (diff <= 0) {
+                    document.getElementById('countdown').style.display = 'none';
+                    document.getElementById('login-form').style.display = 'block';
+                    document.getElementById('birthday-popup').style.display = 'flex';
+                    return;
+                }
+            
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+                document.getElementById('timer').innerHTML = 
+                    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+                
+                document.getElementById('countdown').style.display = 'block';
+                document.getElementById('login-form').style.display = 'none';
+            }
+            
+            function closePopup() {
+                document.getElementById('birthday-popup').style.display = 'none';
+                document.getElementById('login-form').style.display = 'block';
+            }
+            
+            // Update timer every second
+            setInterval(updateTimer, 1000);
+            updateTimer(); // Initial call
+            </script>
+    </div>
     <div id="result"></div>
     <script>
         const form = document.getElementById('login-form');
@@ -107,8 +156,8 @@
         const submitBtn = document.getElementById('submit-btn');
         const resultDiv = document.getElementById('result');
 
-        const secretCode = 'Shobhit'; // Replace with your secret code
-        const nextPageUrl = 'main.html'; // Replace with the URL of the new page
+        const secretCode = 'meri jaan'; // Replace with your secret code
+        const nextPageUrl = 'letter.html'; // Replace with the URL of the new page
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -117,7 +166,7 @@
                 resultDiv.innerHTML = 'Baby';
                 window.location.href = nextPageUrl; // Redirect to new page
             } else {
-                resultDiv.innerHTML = 'Naa Tum meri baby nhi hoo kon hooo tum kaha hai meri Shobhit';
+                resultDiv.innerHTML = 'Naa Tum meri baby nhi hoo kon hooo tum';
             }
         });
 
@@ -136,5 +185,24 @@
         // Generate falling emojis every 500ms
         setInterval(createFallingEmoji, 500);
     </script>
+<!-- Add this before closing body tag -->
+<div id="music-player" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+    <audio id="bg-music" loop>
+        <source src="your-song.mp3" type="audio/mpeg">
+    </audio>
+    <button onclick="toggleMusic()" style="background: #ff4d79; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer;">
+        🎵 Toggle Music
+    </button>
+</div>
+
+<script>
+let isPlaying = false;
+const audio = document.getElementById('bg-music');
+
+function toggleMusic() {
+    isPlaying ? audio.pause() : audio.play();
+    isPlaying = !isPlaying;
+}
+</script>
 </body>
 </html>
